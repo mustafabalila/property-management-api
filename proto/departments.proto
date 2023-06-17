@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+service DepartmentManagementService {
+    rpc getDepartments(GetDepartmentsRequest) returns (GetDepartmentsResponse) {}
+    rpc getDepartment(GetDepartmentRequest) returns (GetDepartmentResponse) {}
+    rpc createDepartment(CreateDepartmentRequest) returns (GenericResponse) {}
+    rpc updateDepartment(UpdateDepartmentRequest) returns (GenericResponse) {}
+    rpc deleteDepartment(DeleteDepartmentRequest) returns (GenericResponse) {}
+    rpc assignMember(AssignMemberRequest) returns (GenericResponse) {}
+    rpc unassignMember(AssignMemberRequest) returns (GenericResponse) {}
+    rpc getDepartmentMembers(getDepartmentMembersRequest) returns (GetDepartmentMembersResponse) {}
+}
+
+message GetDepartmentsRequest {
+    uint64 page = 1;
+    uint64 limit = 2;
+    string name = 3;
+}
+
+message GetDepartmentsResponse {
+    repeated Department list = 1;
+    int32 total = 2;
+}
+
+message GetDepartmentRequest {
+    int32 id = 1;
+}
+
+message GetDepartmentResponse {
+    Department department = 1;
+}
+
+message CreateDepartmentRequest {
+    string name = 1;
+}
+
+message UpdateDepartmentRequest {
+    int32 id = 1;
+    string name = 2;
+}
+
+message DeleteDepartmentRequest {
+    int32 id = 1;
+}
+
+message AssignMemberRequest {
+    uint64 department_id = 1;
+    uint64 member_id = 2;
+}
+
+message getDepartmentMembersRequest {
+    uint64 department_id = 1;
+    string search = 2;
+    uint64 page = 3;
+    uint64 limit = 4;
+}
+
+message GetDepartmentMembersResponse {
+    repeated StaffMember list = 1;
+    int32 total = 2;
+}
+
+message Department {
+    uint64 id = 1;
+    string name = 2;
+    string created_at = 3;
+    string updated_at = 4;
+}

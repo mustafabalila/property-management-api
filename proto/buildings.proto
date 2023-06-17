@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+service BuildingManagementService {
+    rpc getBuildings(GetBuildingsRequest) returns (GetBuildingsResponse) {}
+    rpc getBuilding(GetBuildingRequest) returns (GetBuildingResponse) {}
+    rpc createBuilding(CreateBuildingRequest) returns (GenericResponse) {}
+    rpc updateBuilding(UpdateBuildingRequest) returns (GenericResponse) {}
+    rpc deleteBuilding(DeleteBuildingRequest) returns (GenericResponse) {}
+}
+
+message GetBuildingsRequest {
+    int32 page = 1;
+    int32 limit = 2;
+    string name = 3;
+    string city = 4;
+}
+
+message GenericResponse {
+    string message = 1;
+}
+
+message GetBuildingsResponse {
+    repeated Building list = 1;
+    int32 total = 2;
+}
+
+message GetBuildingRequest {
+    int32 id = 1;
+}
+
+message GetBuildingResponse {
+    map<string, string> building = 1;
+}
+
+message Location {
+    double latitude = 1;
+    double longitude = 2;
+}
+
+message CreateBuildingRequest {
+    string name = 1;
+    string city = 2;
+    string address = 3;
+    string state = 4;
+    Location coordinates = 5;
+    string description = 6;
+    string created_at = 7;
+    int32 managed_by = 8;
+}
+
+message UpdateBuildingRequest {
+    int32 id = 1;
+    string name = 2;
+    string city = 3;
+    string address = 4;
+    string state = 5;
+    Location coordinates = 6;
+    string description = 7;
+    int32 managed_by = 9;
+}
+
+message DeleteBuildingRequest {
+    int32 id = 1;
+}
+
+message Building {
+    uint64 id = 1;
+    string name = 2;
+    string city = 3;
+    string address = 4;
+    string state = 5;
+    string coordinates = 6;
+    string description = 7;
+    string created_at = 8;
+    string updated_at = 9;
+    oneof managed_by_field {
+        uint64 managed_by_id = 10;
+        StaffMember managed_by = 11;
+    }
+}
+ 

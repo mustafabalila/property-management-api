@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package property_management;
+
+import "buildings.proto";
+import "departments.proto";
+import "staff_members.proto";
+import "properties.proto";
+import "assignments.proto";

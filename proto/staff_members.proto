@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+service StaffManagementService {
+    rpc getStaffMembers (GetStaffMemberListRequest) returns (GetStaffMembersResponse) {}
+    rpc getStaffMember (GetStaffMemberRequest) returns (GetStaffMemberResponse) {}
+    rpc createStaffMember (CreateStaffMemberRequest) returns (GenericResponse) {}
+    rpc updateStaffMember (UpdateStaffMemberRequest) returns (GenericResponse) {}
+    rpc deleteStaffMember (DeleteStaffMemberRequest) returns (GenericResponse) {}
+}
+
+message GetStaffMemberListRequest {
+    int32 page = 1;
+    int32 limit = 2;
+    string search = 3;
+    int32 role_id = 4;
+    int32 department_id = 5;
+}
+
+message GetStaffMembersResponse {
+    repeated StaffMember list = 1;
+    int32 total = 2;
+}
+
+message GetStaffMemberRequest {
+    int32 id = 1;
+}
+
+message GetStaffMemberResponse {
+    StaffMember staff = 1;
+}
+
+message CreateStaffMemberRequest {
+    string name = 1;
+    string phone = 2;
+    string email = 3;
+    string address = 4;
+    string password = 5;
+    int32 role_id = 7;
+}
+
+message UpdateStaffMemberRequest {
+    int32 id = 1;
+    string name = 2;
+    string phone = 3;
+    string email = 4;
+    string address = 5;
+    string password = 6;
+    int32 role_id = 7;
+}
+
+message DeleteStaffMemberRequest {
+    int32 id = 1;
+}
+
+message StaffMember {
+    int32 id = 1;
+    string name = 2;
+    string phone = 3;
+    string email = 4;
+    int32 role_id = 7;
+    int32 department_id = 8;
+    string created_at = 9;
+    string updated_at = 10;
+}

@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+service PropertyManagementService {
+    rpc getProperties(GetPropertiesRequest) returns (GetPropertiesResponse) {}
+    rpc getProperty(GetPropertyRequest) returns (GetPropertyResponse) {}
+    rpc createProperty(CreatePropertyRequest) returns (GenericResponse) {}
+    rpc updateProperty(UpdatePropertyRequest) returns (GenericResponse) {}
+    rpc deleteProperty(DeletePropertyRequest) returns (GenericResponse) {}
+}
+
+message GetPropertiesRequest {
+    int32 page = 2;
+    int32 limit = 3;
+    optional string building_id = 4;
+    optional string search = 5;
+}
+
+message GetPropertiesResponse {
+    repeated Property list = 1;
+    int32 total = 2;
+}
+
+message GetPropertyRequest {
+    uint64 id = 1;
+}
+
+message GetPropertyResponse {
+    Property property = 1;
+}
+
+message CreatePropertyRequest {
+    string building_id = 1;
+    string name = 2;
+    string description = 3;
+    string type = 4;
+    int32 bedrooms = 5;
+    int32 bathrooms = 6;
+    int32 floor_number = 7;
+}
+
+message UpdatePropertyRequest {
+    uint64 id = 1;
+    uint64 building_id = 2;
+    string name = 3;
+    string description = 4;
+    string type = 5;
+    int32 bedrooms = 6;
+    int32 bathrooms = 7;
+    int32 floor_number = 8;
+}
+
+message DeletePropertyRequest {
+    uint64 id = 1;
+}
+
+message Property {
+    uint64 id = 1;
+    string building_id = 2;
+    string name = 3;
+    string description = 4;
+    string type = 5;
+    int32 bedrooms = 6;
+    int32 bathrooms = 7;
+    int32 floor_number = 8;
+    string created_at = 9;
+    string updated_at = 10;
+}

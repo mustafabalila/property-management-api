@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+service PropertyAssignmentService {
+    rpc getAssignments(GetAssignmentsRequest) returns (GetAssignmentsResponse);
+    rpc getAssignment(GetAssignmentRequest) returns (GetAssignmentResponse);
+    rpc createAssignment(CreateAssignmentRequest) returns (GenericResponse);
+    rpc updateAssignment(UpdateAssignmentRequest) returns (GenericResponse);
+    rpc deleteAssignment(DeleteAssignmentRequest) returns (GenericResponse);
+}
+
+message GetAssignmentsRequest {
+    uint32 page = 1;
+    uint32 limit = 2;
+    optional uint64 property_id = 3;
+    optional uint64 department_id = 4;
+    optional uint64 member_id = 5;
+    optional string status = 6;
+    optional string due_date = 7;
+    optional string start_date = 8;
+    optional string end_date = 9;
+}
+
+message GetAssignmentsResponse {
+    repeated Assignment list = 1;
+    uint32 total = 2;
+}
+
+message GetAssignmentRequest {
+    uint64 id = 1;
+}
+
+message GetAssignmentResponse {
+    Assignment assignment = 1;
+}
+
+message CreateAssignmentRequest {
+    uint64 property_id = 1;
+    uint64 department_id = 2;
+    optional uint64 member_id = 3;
+    string description = 4;
+    string due_date = 5;
+}
+
+message UpdateAssignmentRequest {
+    uint64 id = 1;
+    optional uint64 property_id = 2;
+    optional uint64 department_id = 3;
+    optional uint64 member_id = 4;
+    optional string description = 5;
+    optional string due_date = 6;
+    optional string status = 7;
+}
+
+message UpdateAssignmentResponse {
+    string message = 1;
+}
+
+message DeleteAssignmentRequest {
+    uint64 id = 1;
+}
+
+message Assignment {
+    uint64 id = 1;
+    uint64 property_id = 2;
+    uint64 department_id = 3;
+    uint64 member_id = 4;
+    string description = 5;
+    string due_date = 6;
+    string status = 7;
+    string created_at = 8;
+    string updated_at = 9;
+}
